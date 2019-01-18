@@ -53,3 +53,15 @@ fragment userInfo on MeType {
     }
   }
 }
+
+---reading from mongo---
+query MyContests{
+  me(key: "4242"){
+    id
+    email
+    fullName
+    contestsCount
+    namesCount
+    votesCount
+  }
+}
