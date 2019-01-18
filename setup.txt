@@ -8,3 +8,48 @@ contests~# \dt
 
 ---for MongoDB populate---
 node database/loadTestMongoData.js
+
+---GraphQL---
+{
+  me(key: "4242"){
+    id
+    email
+    firstName
+    lastName
+    fullName
+    createdAt
+  }
+}
+
+---using alias and fragment--- 
+{
+  user1: me(key: "4242"){
+    ...userInfo
+  },
+  user2: me(key: "0000"){
+    ...userInfo
+  }
+}
+
+fragment userInfo on MeType {
+  id
+  email
+  fullName
+}
+
+---nested list---
+{
+  me(key: "4242"){
+    id
+    email
+    fullName
+    contests {
+      id
+      code
+      title
+      description
+      status
+      createdAt
+    }
+  }
+}
