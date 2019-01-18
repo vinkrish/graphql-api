@@ -1,0 +1,10 @@
+---for populating postresql---
+createdb contests
+psql contests
+\q
+psql contests < database/test-pg-data.sql
+psql contests
+contests~# \dt
+
+---for MongoDB populate---
+node database/loadTestMongoData.js
