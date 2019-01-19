@@ -9,6 +9,8 @@ contests~# \dt
 ---for MongoDB populate---
 node database/loadTestMongoData.js
 
+URL: http://localhost:3000/graphql
+
 ---GraphQL---
 {
   me(key: "4242"){
