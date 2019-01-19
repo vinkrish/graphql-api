@@ -67,3 +67,23 @@ query MyContests{
     votesCount
   }
 }
+
+query MyContests{
+  me(key: "4242"){
+    id
+    email
+    fullName
+    contestsCount
+    namesCount
+    votesCount
+    contests {
+      title
+      names {
+        label
+        createdBy {
+          fullName
+        }
+      }
+    }
+  }
+}
