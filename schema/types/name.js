@@ -5,7 +5,7 @@ const {
     GraphQLNonNull
 } = require('graphql');
 
-// const pgdb = require('../../database/pgdb');
+const pgdb = require('../../database/pgdb');
 
 module.exports = new GraphQLObjectType({
     name: 'Name',
@@ -20,8 +20,8 @@ module.exports = new GraphQLObjectType({
             createdBy: { 
                 type: new GraphQLNonNull(UserType),
                 resolve(obj, args, { loaders }) {
-                    return loaders.usersByIds.load(obj.createdBy);
                     // return pgdb(pgPool).getUserById(obj.createdBy);
+                    return loaders.usersByIds.load(obj.createdBy);
                 }
             }
         }

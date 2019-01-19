@@ -20,15 +20,16 @@ const RootQueryType = new GraphQLObjectType({
         },
         me: {
             type: UserType,
-            description: 'THe current user identified by an api key',
+            description: 'The current user identified by an api key',
             args: {
                 key: {
                     type: new GraphQLNonNull(GraphQLString)
                 }
             },
-            resolve: (obj, args, { pgPool }) => {
+            resolve: (obj, args, { loaders }) => {
                 // Read user information from database
-                return pgdb(pgPool).getUser(args.key)
+                // return pgdb(pgPool).getUserByApiKey(args.key)
+                return loaders.usersByApiKeys.load(args.key);
             }
         }
     }
