@@ -1,19 +1,7 @@
 const humps = require('humps');
-const _ = require('lodash');
+const { orderedFor } = require('./../lib/util');
 
 module.exports = pgPool => {
-    const orderedFor = (rows, collection, field, singleObject) => {
-        const data = humps.camelizeKeys(rows);
-        const inGroupsOfField = _.groupBy(data, field)
-        return collection.map(element => {
-            const elementArray = inGroupsOfField[element];
-            if (elementArray) {
-                return singleObject ? elementArray[0] : elementArray;
-            }
-            return singleObject ? {} : [];
-        });
-    }
-
     return {
         getUserByApiKey(apiKey){
             return pgPool.query(`select * from users where api_key = $1`, [apiKey])
