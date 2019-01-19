@@ -6,6 +6,9 @@ psql contests < database/test-pg-data.sql
 psql contests
 contests~# \dt
 
+query: 
+create view total_votes_by_name as select id as name_id, (select count(up) from votes v where v.name_id = n.id and up = true) as up, (select count(up) from votes v where v.name_id = n.id and up = false) as down from names n;
+ 
 ---for MongoDB populate---
 node database/loadTestMongoData.js
 
@@ -82,6 +85,30 @@ query MyContests{
         label
         createdBy {
           fullName
+        }
+      }
+    }
+  }
+}
+
+query MyContests{
+  me(key: "4242"){
+    id
+    email
+    fullName
+    contestsCount
+    namesCount
+    votesCount
+    contests {
+      title
+      names {
+        label
+        createdBy {
+          fullName
+        }
+        totalVotes {
+          up
+          down
         }
       }
     }
